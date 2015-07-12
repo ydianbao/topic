@@ -1,0 +1,66 @@
+<include file="Public:editor" />
+<div class="datagrid-toolbar form-panel">
+    <table>
+        <tr>
+            <td width="100%">
+                <a class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="onSubmit()">保存</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<form id="article" data-url="{:U('save')}" method="post" class="content-layout">
+    <div class="easyui-panel" title="文章表单" style="padding:10px;">
+        <table class="form-panel">
+            <tr>
+                <th>所属分类：</th>
+                <td>
+                    <input class="easyui-combotree" name="cat_id" value="{$info.cat_id}" method="get" style="width:250px;" url="{:U('articlecat/index?type=select')}">
+                </td>
+            </tr>
+            <tr>
+                <th>标题：</th>
+                <td>
+                    <input name="title" class="easyui-textbox" value="{$info.title}" size="45" data-options="required:true">
+                </td>
+            </tr>
+            <tr>
+                <th>关键字：</th>
+                <td>
+                    <input name="keywords" class="easyui-textbox" size="45" value="{$info.keywords}">
+                </td>
+            </tr>
+            <tr>
+                <th>描述：</th>
+                <td>
+                    <input name="description" class="easyui-textbox" data-options="multiline:true" value="{$info.description}" style="width:500px;height:100px">
+                </td>
+            </tr>
+            <tr>
+                <th>内容：</th>
+                <td>
+                    <textarea id="content" name="content" style="width:600px; height:400px;">{:htmlspecialchars_decode($info['content'])}</textarea>
+                    <input type="hidden" name="id" value="{$info.id}">
+                </td>
+            </tr>
+        </table>
+        <div class="panel-footer" style="padding:5px;">
+            <a class="easyui-linkbutton" iconCls="icon-save" onclick="onSubmit()"> 保存</a>
+        </div>
+    </div>
+
+</form>
+<script type="text/javascript">
+    var ue = UE.getEditor('content');
+    function onSubmit(){
+        easyui.submit('article', function(result){
+            try{
+                easyui.confirm(result.info + '是否关闭窗口？', function(isOk){
+                    if(isOk) {
+                        parent.closeTab();
+                        return;
+                    }
+                });
+            }catch (e){}
+        })
+    }
+</script>

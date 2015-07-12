@@ -1,0 +1,61 @@
+<div class="datagrid-toolbar form-panel">
+    <table>
+        <tr>
+            <td width="100%">
+
+            </td>
+            <td>
+                <input name="keyword" class="easyui-textbox" data-options="buttonText:' 搜索 ',prompt:'请输入关键词...',buttonIcon:'icon-search',onClickButton: onSearch" style="width:250px;">
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="content-layout">
+    <table id="grid" title="会员列表">
+        <thead>
+        <tr>
+            <th data-options="field:'ck',checkbox:true"></th>
+            <th data-options="field:'email',width:120, sortable:true">登录邮箱</th>
+            <th data-options="field:'create_time',width:120, sortable:true">添加时间</th>
+            <th data-options="field:'update_time',width:120, sortable:true">更新时间</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<script type="text/javascript">
+    var grid = $('#grid');
+    $(function() {
+        grid.datagrid({
+            url: location.href,
+            height: 450,
+            width: '100%',
+            pagination: true,
+            fitColumns: true,
+            singleSelect:true,
+            rownumbers:true,
+            selectOnCheck:false,
+            checkOnSelect: false
+        });
+    });
+
+    function onSearch() {
+        grid.datagrid({
+            queryParams: {
+                keyword: $(this).val()
+            }
+        });
+    }
+
+    function onOpen(node){
+        var opts = {
+            href: '{:U("form")}',
+            width: 600,
+            height: 400,
+            data: node,
+            handler: function(result){
+                grid.datagrid('reload');
+            }
+        };
+        easyui.dialog(opts);
+    }
+</script>

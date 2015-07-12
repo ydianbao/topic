@@ -1,0 +1,12 @@
+<script type="text/javascript">
+    var url = '{$jumpUrl}';
+    var message = "{$status?$message:$error}";
+    easyui.alert(message, function(){
+        try{
+    		parent.closeTab();
+        }catch(e){}
+        if(url) {
+            parent.location.href = url;
+        }
+    });
+</script>

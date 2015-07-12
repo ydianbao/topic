@@ -1,0 +1,265 @@
+@import "font-awesome.min.css";
+body{
+    margin: 0;
+    padding: 0;
+    color:#404040;
+    font-family: "Helvetica Neue", "Hiragino Sans GB", Helvetica, "Microsoft YaHei", "微软雅黑", "宋体", Arial, sans-serif;
+    font-size: 14px;
+}
+*{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+fieldset {
+    padding:5px;
+    margin: 5px 5px 10px;
+    border:1px dashed #D4D4D4;
+    background: #f9fafc;
+    position: relative;
+}
+.legend {
+    margin: -15px 25px 5px;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 5px;
+    position: relative;
+    z-index: 999;
+}
+.center {
+    text-align: center;
+}
+.blank {
+    height: 10px;
+    overflow: hidden;
+}
+.left { float: left;}
+.right { float: right;}
+
+/*头部样式*/
+.top-region{
+    background: #efefef;
+    padding-bottom: 3px;
+}
+.top-layout{
+    height: 40px;
+    background: #2d3e50;
+    color: #FFF;
+    position: relative;
+}
+.top-layout a {
+    color: #FFF;
+    text-decoration: none;
+}
+.top-logo{
+    width: 179px;
+    color:#FFF;
+    background: #3190ee;
+    line-height: 40px;
+    font-size: 18px;
+    padding-left: 20px;
+    float: left;
+}
+.top-left-a{
+    float:left;
+    width: 25px;
+    height: 40px;
+    margin-left: 20px;
+}
+.west-layout {
+    width: 200px;
+    background: #fafafa none repeat scroll 0 0
+}
+.west-layout h2 {
+    font-size: 16px;
+    font-weight: normal;
+    color: #444;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+}
+
+.nav li {
+    float: left;
+}
+.nav li a {
+    display: block;
+    line-height: 20px;
+    font-size: 14px;
+    padding: 10px 15px;
+    color: #ccc;
+    cursor: pointer;
+}
+.nav li a:hover, .nav li a.active {
+    background-color: #34495e;
+    color: #ddd;
+    font-weight: normal;
+}
+.nav li a.nav-logout {
+    background-color: #e33;
+    color: #fff;
+}
+.nav li a.nav-logout:hover {
+    background-color: #c72525;
+    color: #fff;
+}
+.content-layout{
+    padding: 10px;
+}
+
+/*表单样式开始*/
+.form-panel {
+    padding: 5px;
+}
+.form-panel th{
+    line-height: 40px;
+    padding-left: 10px;
+    text-align: right;
+    font-weight: normal;
+}
+.form-panel span.tips {
+    margin-left: 10px;
+    color: gray;
+}
+.form-panel span.combo,
+.form-panel span.spinner {
+    border: 1px solid #D0D0D0;
+    padding: 0px;
+}
+.form-panel input.combo-text{
+    margin: 0px;
+    padding: 0 2px;
+}
+.form-panel .spinner-arrow,
+.form-panel .combo-arrow {
+    background-color: #f3f3f3;
+}
+.form-panel .form-items {
+    margin-bottom: 10px;
+}
+.form-items label {
+    height: 30px;
+    display: block;
+}
+.form-items label span {
+    color: #aaa;
+}
+.form-panel input.input-large {
+    width: 300px;
+    padding: 5px 5px;
+}
+.button-large {
+    min-width: 80px;
+    padding:5px 0px;
+    font-size: 14px;
+}
+.button-small {
+    padding:2px 20px;
+    font-size: 14px;
+}
+.input-upper {
+    text-transform: uppercase;
+}
+
+/*表单样式结束*/
+
+/*表格样式*/
+.list-table {
+    border: 0;
+    border-collapse: collapse;
+}
+.list-table th,
+.list-table td {
+    padding: 5px;
+    border: solid #e6e6e6 1px;
+    background: #FFF;
+}
+.list-table th {
+    font-weight: normal;
+    background: #fafbfb;
+}
+.th-right th {
+    text-align: right;
+}
+.th-left th {
+    text-align: left;
+}
+
+/*左边菜单开始*/
+.left-menu li a{
+    display:block;
+    cursor: pointer;
+    padding: 10px;
+    line-height: 20px;
+    color: #333;
+    font-size: 14px;
+}
+.left-menu li a:hover,
+.left-menu li a.active {
+    background-color: #d9e2ec;
+    color: #444;
+    font-weight: normal;
+}
+/*左边菜单结束*/
+
+/*easyui样式替换*/
+.toolbar-outer {
+    border: 1px solid #D4D4D4;
+    margin: 2px;
+}
+.toolbar-inner {
+    border: 1px solid #FFFFFF;
+}
+.datagrid-btn-separator {
+    float: none;
+}
+.images-btn {
+    width: 16px;
+    height: 16px;
+    padding-left: 18px;
+    margin-left: 10px;
+    text-decoration: none;
+    color: #000;
+    background-position: left center;
+    display: inline-block;
+    cursor: pointer;
+}
+.datagrid-row-selected {
+    background: none repeat scroll 0 0 #D9E2EC;
+    color: #000;
+}
+.datagrid-row-over {
+    background: none repeat scroll 0 0 #D9E2EC;
+}
+.tree-node-selected,
+.combobox-item-selected {
+    background: none repeat scroll 0 0 #efefef;
+    color: #000;
+}
+.accordion
+.accordion-header-selected {
+    background: none repeat scroll 0 0 #F3F3F3;
+}
+.panel-header {
+    background: #f9fafc;
+}
+.panel-title {
+    font-weight: normal;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+.accordion
+.accordion-header-selected
+.panel-title {
+    color: #575765;
+}
+.panel-body {
+    color:#404040;
+    font-size: 14px;
+}
+.l-btn-text { font-size: 14px;}
+/*easyui样式替换结束*/

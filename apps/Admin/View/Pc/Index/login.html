@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>管理中心</title>
+    <script src="/public/common/jquery.min.js"></script>
+    <script src="/public/common/public.js"></script>
+    <script src="/public/admin/js/easyui.js"></script>
+    <link rel="stylesheet" href="/public/admin/style/login.css">
+	<!--[if lt IE 9]>
+    <link rel="stylesheet" href="/public/admin/style/ie.css">
+    <![endif]-->
+</head>
+<body>
+<div class="login-panel">
+    <div class="login-logo">管理中心</div>
+    <form id="login-form" method="post" data-url="{:U('login')}">
+        <div class="login-label">
+            <input class="easyui-textbox" name="login_name" style="width:100%; height:40px;padding:12px" data-options="prompt:'请输入用户名', required:true, missingMessage: '请输入用户名', iconCls:'icon-man',iconWidth:38">
+        </div>
+        <div class="login-label">
+            <input class="easyui-textbox" type="password" name="login_password" style="width:100%;height:40px;padding:12px" data-options="prompt:'请输入登录密码', required:true, missingMessage: '请输入登录密码',iconCls:'icon-lock',iconWidth:38">
+        </div>
+        <div class="login-label">
+            <a class="easyui-linkbutton" style="width:100%; height: 40px;" onclick="login()">
+                <span style="font-size:14px;">登录</span>
+            </a>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function login(){
+        var formObj = $('#login-form');
+        easyui.submit(formObj, function(result){
+            if(!result.status){
+                easyui.alert(result.info);
+                return false;
+            }
+            window.location.href = '{:U("/admin")}';
+        });
+        return false;
+    }
+</script>
+</body>
+</html>

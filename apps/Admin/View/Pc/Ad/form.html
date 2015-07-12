@@ -1,0 +1,76 @@
+<include file="Public:editor" />
+<div class="datagrid-toolbar form-panel">
+    <table>
+        <tr>
+            <td width="100%">
+                <a class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="onSubmit()">保存</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<form data-url="{:U('save')}" method="post" class="content-layout">
+    <div class="easyui-panel" title="题目表单" style="padding:10px;">
+        <table class="form-panel">
+            <tr>
+                <th>广告标题：</th>
+                <td>
+                    <input name="topic_title" class="easyui-textbox" value="{$info.topic_title}" size="45" data-options="required:true">
+                </td>
+            </tr>
+            <tr>
+                <th>广告图：</th>
+                <td id="ad_upload">
+                    <div class="ad_upload">
+                        <input class="easyui-textbox" size="45" name="ad_config[]" data-options="prompt:'图片路径...',buttonText:'选择图片', onClickButton: onUpload" value="{$info.thumb_img}">
+                        <a class="easyui-linkbutton">+</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="panel-footer" style="padding:5px;">
+            <div style="display: none;">
+                <textarea id="content"></textarea>
+            </div>
+            <input type="hidden" name="topic_id" value="{$info.topic_id}">
+            <a class="easyui-linkbutton button-large" iconCls="icon-save" onclick="onSubmit()"> 保存</a>
+        </div>
+    </div>
+
+</form>
+<script type="text/javascript">
+    var ue;
+    $(function(){
+        ue = UE.getEditor('content',{
+            hide:true,
+            onready: function(){
+                this.hide();
+            }
+        });
+    });
+
+    function onUpload() {
+        var obj = $(this);
+        ue.addListener('afterinsertimage', function (t, args) {
+            obj.textbox('setValue', args[0].src);
+        });
+        ue.reset();
+        var dlg = ue.getDialog("insertimage");
+        dlg.render();
+        dlg.open();
+
+    }
+
+    function onSubmit(){
+        easyui.submit('.content-layout', function(result){
+            try{
+                easyui.confirm(result.info + '是否关闭窗口？', function(isOk){
+                    if(isOk) {
+                        parent.closeTab();
+                        return;
+                    }
+                });
+            }catch (e){}
+        })
+    }
+    initUploadImage('#thumb_img');
+</script>

@@ -1,0 +1,87 @@
+<div class="datagrid-toolbar">
+    <table class="form-panel">
+        <tr>
+            <td>
+                <a class="easyui-linkbutton" plain="true" onclick="onOpen({})"><i class="fa fa-plus"></i> 添加</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="content-layout">
+    <table id="grid" title="功能列表" width="100%">
+        <thead>
+        <tr>
+            <th data-options="field:'text',width:120">功能名称</th>
+            <th data-options="field:'controller',width:50">模块名</th>
+            <th data-options="field:'method',width:50">方法名</th>
+            <th data-options="field:'display',width:50,align:'center', formatter: function(value){
+            return value == '1' ? '<font color=red>是</font>' : '否';
+        }">显示</th>
+            <th data-options="field:'power',width:90">权限验证</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+<div id="leftMenu" class="easyui-menu" data-options="onClick:onMenu" style="width:120px;">
+    <div data-options="name:'delete', iconCls:'icon-no'">删除</div>
+    <div data-options="name:'reload',iconCls:'icon-save'">刷新</div>
+</div>
+<script type="text/javascript">
+    var grid = $('#grid');
+    var rowId = 0;
+    $(function(){
+        grid.treegrid({
+            url:'{:U()}',
+            idField:'id',
+            treeField:'text',
+            fitColumns: true,
+            selectOnCheck:false,
+            checkOnSelect: false,
+            onContextMenu: function(e, row){
+                e.preventDefault();
+                rowId = row.id;
+                $('#leftMenu').menu('show', {
+                    left:e.pageX,
+                    top:e.pageY
+                });
+            },
+            onDblClickRow: function(node){
+                onOpen(node);
+            }
+        });
+    });
+
+    function onOpen(node) {
+        if(!node) {
+            var row = grid.treegrid('getSelected');
+            node = {pid: row.id};
+        }
+        var opts = {
+            href: '{:U("form")}',
+            width: 600,
+            height: 400,
+            data: node,
+            handler: function(result){
+                grid.treegrid('reload');
+            }
+        };
+        easyui.dialog(opts);
+    }
+
+    function onMenu(item) {
+        switch (item.name) {
+            case 'reload':
+                grid.treegrid('reload');
+                break;
+            case 'delete':
+                if(rowId) {
+                    easyui.doAjax('{:U("delete")}', {item_id: rowId}, function(){
+                        grid.treegrid('reload');
+                    });
+                }
+        }
+
+    }
+
+</script>

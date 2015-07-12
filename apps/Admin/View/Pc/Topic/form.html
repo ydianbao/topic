@@ -1,0 +1,83 @@
+<include file="Public:editor" />
+<div class="datagrid-toolbar form-panel">
+    <table>
+        <tr>
+            <td width="100%">
+                <a class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="onSubmit()">保存</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<form data-url="{:U('save')}" method="post" class="content-layout">
+    <div class="easyui-panel" title="题目表单" style="padding:10px;">
+        <table class="form-panel">
+            <tr>
+                <th>题目标题：</th>
+                <td>
+                    <input name="topic_title" class="easyui-textbox" value="{$info.topic_title}" size="45" data-options="required:true">
+                </td>
+            </tr>
+            <tr>
+                <th>排序：</th>
+                <td>
+                    <input name="orderby" class="easyui-textbox" size="45" value="{$info.orderby}">
+                </td>
+            </tr>
+            <tr>
+                <th>答案说明：</th>
+                <td>
+                    <input name="answer_remark" class="easyui-textbox" data-options="multiline:true" value="{$info.answer_remark}" style="width:500px;height:100px">
+                </td>
+            </tr>
+            <tr>
+                <th>缩略图：</th>
+                <td>
+                    <input class="easyui-textbox" id="thumb_img" name="thumb_img" data-options="prompt:'图片路径...',buttonText:'选择图片'" value="{$info.thumb_img}" style="width:500px">
+                </td>
+            </tr>
+            <tr>
+                <th>答案：</th>
+                <td>
+                    <p>
+                        A：<input name="answer_config[a]" class="easyui-textbox" size="45" value="{$info.answer_config.a}">
+                    </p>
+                    <p>
+                        B：<input name="answer_config[b]" class="easyui-textbox" size="45" value="{$info.answer_config.b}">
+                    </p>
+                    <p>
+                        C：<input name="answer_config[c]" class="easyui-textbox" size="45" value="{$info.answer_config.c}">
+                    </p>
+                    <p>
+                        D：<input name="answer_config[d]" class="easyui-textbox" size="45" value="{$info.answer_config.d}">
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>正确答案编号：</th>
+                <td>
+                    <input name="answer" class="easyui-textbox" value="{$info.answer}">
+                </td>
+            </tr>
+        </table>
+        <div class="panel-footer" style="padding:5px;">
+            <input type="hidden" name="topic_id" value="{$info.topic_id}">
+            <a class="easyui-linkbutton" iconCls="icon-save" onclick="onSubmit()"> 保存</a>
+        </div>
+    </div>
+
+</form>
+<script type="text/javascript">
+    function onSubmit(){
+        easyui.submit('.content-layout', function(result){
+            try{
+                easyui.confirm(result.info + '是否关闭窗口？', function(isOk){
+                    if(isOk) {
+                        parent.closeTab();
+                        return;
+                    }
+                });
+            }catch (e){}
+        })
+    }
+    initUploadImage('#thumb_img');
+</script>

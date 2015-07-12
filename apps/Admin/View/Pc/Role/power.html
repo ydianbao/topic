@@ -1,0 +1,37 @@
+<ul id="grid"></ul>
+<script type="text/javascript">
+    var grid = $('#grid');
+    var menu_id = '{$role.menu_id}';
+    grid.tree({
+        dnd: true,
+        lines: true,
+        animate: true,
+        checkbox: true,
+        cascadeCheck: false,
+        onContextMenu: function(e, node) {
+            e.preventDefault();
+            return false;
+        },
+        onLoadSuccess: function(node, data) {
+            menu_id = menu_id.split(',');
+            for(var i in menu_id) {
+                var node = grid.tree('find', menu_id[i]);
+                if(node) {
+                    grid.tree('check', node.target);
+                }
+            }
+        },
+        data: {$menu}
+    });
+
+    var onReturn = function(){
+        var rows = grid.tree('getChecked');
+        var items = [];
+        if(rows) {
+            for(var i = 0; i < rows.length; i++) {
+                items.push(rows[i].id);
+            }
+        }
+        return items.join(',');
+    }
+</script>

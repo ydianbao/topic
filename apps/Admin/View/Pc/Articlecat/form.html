@@ -1,0 +1,27 @@
+<form id="form" data-url="{:U('save')}" method="post" class="form-panel">
+    <table>
+        <tr>
+            <th>类别名称：</th>
+            <td><input name="text" class="easyui-textbox" data-options="required:true"></td>
+        </tr>
+        <tr>
+            <th>上级分类:</th>
+            <td><input class="easyui-combotree" id="parent_id" name="pid" method="get" data-options="url:'{:U('index?type=parent')}'" style="width:150px;"></td>
+        </tr>
+        <tr>
+            <th>排序:</th>
+            <td><input name="orderby" class="easyui-textbox" value="0"></td>
+        </tr>
+        <tr>
+            <th>关键字:</th>
+            <td><input name="keywords" class="easyui-textbox"></td>
+        </tr>
+        <tr>
+            <th>描述:</th>
+            <td>
+                <input name="description" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:100px">
+                <input type="hidden" id="id" name="id" value="0">
+            </td>
+        </tr>
+    </table>
+</form>

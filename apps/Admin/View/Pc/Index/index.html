@@ -1,0 +1,30 @@
+<include file="Public:header" />
+<script src="/public/admin/js/index.js"></script>
+<div id="common-layout" class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'north', border: false, split:false">
+        <div class="top-layout">
+            <div class="top-logo"><a href="javascript:;" id="resize-bars"><i class="fa fa-bars"></i></a> 管理平台</div>
+            <ul class="nav left" id="nav"></ul>
+            <ul class="nav right">
+                <li><a href="{:U('/')}" class="fa fa-home" target="_blank"></a></li>
+                <li><a href="javascript:;" onclick="openTab(null, '个人信息', '{:U(\'admin/information\')}', true)" class="fa fa-user"></a></li>
+                <li><a href="{:U('passport/logout')}" class="fa fa-power-off nav-logout"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="commom-west" data-options="region:'west',split:false" class="west-layout">
+        <h2 id="nav-title"></h2>
+        <ul class="left-menu"></ul>
+    </div>
+    <div data-options="region:'center',border:false,split:false">
+        <div id="right-tabs" class="easyui-tabs" data-options="fit:true,border:true,tabPosition:'bottom',plain:true,onContextMenu:onRightTabsContextMenu">
+            <div title="工作台"  class="content-layout"></div>
+        </div>
+    </div>
+</div>
+<div id="rightTabsMenu" class="easyui-menu" data-options="onClick:onRightTabsHandler" style="width:120px;">
+    <div data-options="name:'close', iconCls:'icon-no'">关闭当前标签页</div>
+    <div data-options="name:'closeAll', iconCls:'icon-no'">关闭所有标签页</div>
+    <div data-options="name:'reload',iconCls:'icon-save'">刷新</div>
+</div>
+<include file="Public:footer" />
