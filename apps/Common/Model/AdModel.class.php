@@ -25,4 +25,12 @@ class AdModel extends CommonModel {
         }
         return $this->where($where);
     }
+
+    public function format($data) {
+        foreach($data['rows'] as $key => $row) {
+            $row['func'] = "ad({$row['ad_id']})";
+            $data['rows'][$key] = $row;
+        }
+        return $data;
+    }
 }

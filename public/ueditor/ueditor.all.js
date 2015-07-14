@@ -29220,10 +29220,6 @@ UE.ui = baidu.editor.ui = {};
                         holder && holder.getAttribute('name') && ( editor.options.textarea = holder.getAttribute('name'));
                         if (holder && /script|textarea/ig.test(holder.tagName)) {
                             var newDiv = document.createElement('div');
-                            if(editor.options.hide) {
-
-                                newDiv.hide();
-                            }
                             holder.parentNode.insertBefore(newDiv, holder);
                             var cont = holder.value || holder.innerHTML;
                             editor.options.initialContent = /^[\t\r\n ]*$/.test(cont) ? editor.options.initialContent :
