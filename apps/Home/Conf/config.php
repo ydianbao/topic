@@ -7,8 +7,12 @@ return array(
     'DEFAULT_LANG'              => 'zh-cn', // 允许切换的语言列表 用逗号分隔
 
     'VIEW_PATH'                 => './template/',
-    'DEFAULT_THEME'             => 'web',
-    'THEME_LIST'                => 'web,mobile',
-    'TMPL_ACTION_ERROR'         => 'public:message',
-    'TMPL_ACTION_SUCCESS'       => 'public:message',
+    'TMPL_ACTION_ERROR'         => 'Public:message',
+    'TMPL_ACTION_SUCCESS'       => 'Public:message',
+
+    'URL_ROUTER_ON'   		    => true,
+	'URL_ROUTE_RULES' 		    =>array(
+        '/^article-(\d+)/'        	=> 'article/show?id=:1',
+		'/^(\w+)-(\w+)/'			=> ':1/:2'
+	),
 );

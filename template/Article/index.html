@@ -1,0 +1,13 @@
+<include file="Public:header"/>
+<div class="content">
+    <div class="main">
+        <h2 class="base-title">新闻中心</h2>
+        <ul class="lists">
+            <volist name="lists" id="vo">
+            <li><span>{$vo.create_time}</span>{$key + 1}、<a href="/article-{$vo.id}.html">{$vo.title}</a></li>
+            </volist>
+        </ul>
+        <include file="Public:pager" />
+    </div>
+</div>
+<include file="Public:footer"/>

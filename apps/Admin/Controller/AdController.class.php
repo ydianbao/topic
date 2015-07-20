@@ -27,11 +27,19 @@ class AdController extends CommonController {
     }
 
     public function save() {
+        $params = I('post.');
+        $adConfig = array();
+        foreach($params['ad_img'] as $key => $img) {
+            if(empty($img)) continue;
+            $adConfig[] = array(
+                'img' => $img,
+                'href' => $params['ad_href'][$key],
+                'width' => $params['ad_width'][$key],
+                'height' => $params['ad_height'][$key]
+            );
+        }
         if($params = $this->dbModel->create()) {
-            foreach($params['ad_config'] as $key => $ad_config) {
-                if(empty($ad_config)) unset($params['ad_config'][$key]);
-            }
-            $params['ad_config'] = empty($params['ad_config']) ? '' : json_encode($params['ad_config']);
+            $params['ad_config'] = empty($adConfig) ? '' : json_encode($adConfig);
             if(empty($params['ad_id'])) {
                 $result = $this->dbModel->add($params);
             }else {

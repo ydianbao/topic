@@ -1,0 +1,17 @@
+<include file="Public:header"/>
+<div class="content">
+    <div class="main">
+    	{$html}
+    	<div style="text-align:center;">
+    		正在跳转到支付网站......
+    	</div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	setTimeout(function(){
+		$('#gotopay').submit();
+	}, 1000);
+});
+</script>
+<include file="Public:footer"/>

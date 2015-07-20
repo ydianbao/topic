@@ -1,5 +1,6 @@
 <?php
 return array(
+    'PAGE_NOT_FOUND'            => '页面不存在！',
     'SAVE'                      => '保存',
     'EDIT'                      => '编辑',
     'ADD'                       => '添加',

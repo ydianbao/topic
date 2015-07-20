@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{:C('WEB_TITLE')}</title>
+    <link rel="stylesheet" href="/template/style/css/base.css">
+    <script type="text/javascript" src="/public/common/jquery.min.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="content">
+        <ul class="link">
+            <li><a href="/">首页</a> </li>
+            <li><a href="{:U('/article/index')}">热门新闻</a> </li>
+            <li><a href="{:U('page/contact')}">联系我们</a> </li>
+            <li><a href="{:U('note/index')}">在线留言</a> </li>
+            <if condition="login('user_id')">
+            <li><a href="{:U('member/index')}">会员中心</a></li>
+            <li>|</li>
+            <li><a href="{:U('passport/logout')}">退出</a> </li>
+            <else/>
+            <li><a href="{:U('passport/login')}">登录</a></li>
+            <li>|</li>
+            <li><a href="{:U('passport/login')}">注册</a> </li>
+            </if>
+        </ul>
+        <a href="/" class="logo"><img src="/template/style/images/logo-yellow.png"></a>
+    </div>
+</div>

@@ -21,6 +21,13 @@
                 <th>排序：</th>
                 <td>
                     <input name="orderby" class="easyui-textbox" size="45" value="{$info.orderby}">
+                    <span class="tips">添加时按已存在题目的最大排序+1填充，非必要请不要修改</span>
+                </td>
+            </tr>
+            <tr>
+                <th>免费：</th>
+                <td>
+                    <input name="is_free" type="checkbox" value="1" <notempty name="info.is_free">checked</notempty>>
                 </td>
             </tr>
             <tr>

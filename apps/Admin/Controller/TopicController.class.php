@@ -21,6 +21,9 @@ class TopicController extends CommonController {
         if($params['answer_config']) {
             $params['answer_config'] = json_encode($params['answer_config']);
         }
+        if(!isset($params['is_free'])) {
+            $params['is_free'] = 0;
+        }
         if($params = $this->dbModel->create($params)) {
             if($params['topic_id']) {
                 $result = $this->dbModel->save($params);
@@ -39,8 +42,12 @@ class TopicController extends CommonController {
         if($id > 0) {
             $info = $this->dbModel->find($id);
             $info['answer_config'] = json_decode($info['answer_config'], true);
-            $this->assign('info', $info);
+        }else {
+            //查询排序最大值
+            $orderby = $this->dbModel->max('orderby');
+            $info['orderby'] = $orderby + 1;
         }
+        $this->assign('info', $info);
         $this->display();
     }
 }

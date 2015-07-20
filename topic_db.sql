@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : localhost
 Source Server Version : 50516
-Source Host           : 127.0.0.1:3306
+Source Host           : localhost:3306
 Source Database       : topic_db
 
 Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2015-07-12 22:41:11
+Date: 2015-07-19 23:56:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,11 +27,14 @@ CREATE TABLE `py_ad` (
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`ad_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of py_ad
 -- ----------------------------
+INSERT INTO `py_ad` VALUES ('1', '首页横幅广告', '0', '[{\"img\":\"\\/public\\/upload\\/image\\/20150715\\/1436965922223291.jpg\",\"href\":\"http:\\/\\/baidu.com\",\"width\":\"\",\"height\":\"50\"},{\"img\":\"\\/public\\/upload\\/image\\/20150715\\/1436968380115441.jpeg\",\"href\":\"taobao.com\",\"width\":\"180\",\"height\":\"50\"}]', '1436881591', '1436968958');
+INSERT INTO `py_ad` VALUES ('2', 'fdfdadsafda', '0', '[{\"img\":\"\\/public\\/upload\\/image\\/20150715\\/1436965922223291.jpg\",\"href\":\"taobao.com\",\"width\":\"150\",\"height\":\"\"}]', '1436881653', '1436969851');
+INSERT INTO `py_ad` VALUES ('3', 'fdafda', '0', '[{\"img\":\"\\/public\\/upload\\/image\\/20150715\\/1436968380115441.jpeg\",\"href\":\"\",\"width\":\"150\",\"height\":\"\"}]', '1436881813', '1436969865');
 
 -- ----------------------------
 -- Table structure for py_admin
@@ -61,7 +64,7 @@ CREATE TABLE `py_admin` (
 -- ----------------------------
 -- Records of py_admin
 -- ----------------------------
-INSERT INTO `py_admin` VALUES ('1', '800001', '超级管理员', '758894b3e908de2074e26216e973e677', '1', '6715e94444d3b15f9e7aaa31f3de3998', '0', '1', '1', '1', '1435324617', '1435323856', '1435324617', '1435323822', '127.0.0.1', '127.0.0.1');
+INSERT INTO `py_admin` VALUES ('1', '800001', '超级管理员', '758894b3e908de2074e26216e973e677', '1', 'e48c61110bd948bf704c30f5dcde8b2e', '0', '1', '1', '1', '1435324617', '1435323856', '1437225982', '1437290944', '127.0.0.1', '127.0.0.1');
 INSERT INTO `py_admin` VALUES ('2', '800014', '测试人员', '758894b3e908de2074e26216e973e677', '1', '00c9a9094e470f82357bc21cb0935ef8', '0', '2', '3', '0', '1435324617', '1435324617', null, null, null, null);
 INSERT INTO `py_admin` VALUES ('5', '800015', '测试', '758894b3e908de2074e26216e973e677', '2', '', '0', '2', '3', '0', '1435324617', '1435324617', null, null, null, null);
 
@@ -80,11 +83,17 @@ CREATE TABLE `py_admin_log` (
   `create_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_note` (`note`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='登录日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='登录日志表';
 
 -- ----------------------------
 -- Records of py_admin_log
 -- ----------------------------
+INSERT INTO `py_admin_log` VALUES ('1', '1', '', '', '', '', null, '1436791982');
+INSERT INTO `py_admin_log` VALUES ('2', '1', '', '', '', '', null, '1436877467');
+INSERT INTO `py_admin_log` VALUES ('3', '1', '', '', '', '', null, '1436965893');
+INSERT INTO `py_admin_log` VALUES ('4', '1', '', '', '', '', null, '1437186755');
+INSERT INTO `py_admin_log` VALUES ('5', '1', '', '', '', '', null, '1437225982');
+INSERT INTO `py_admin_log` VALUES ('6', '1', '', '', '', '', null, '1437290944');
 
 -- ----------------------------
 -- Table structure for py_article
@@ -152,20 +161,15 @@ CREATE TABLE `py_config` (
   UNIQUE KEY `uk_name` (`name`),
   KEY `type` (`type`),
   KEY `group` (`group`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='系统配置表';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='系统配置表';
 
 -- ----------------------------
 -- Records of py_config
 -- ----------------------------
-INSERT INTO `py_config` VALUES ('1', 'WEB_SITE_TITLE', '1', '网站标题', '1', '', '网站标题前台显示标题', '1435324617', '1435324617', '乐微网', '50');
-INSERT INTO `py_config` VALUES ('2', 'WEB_SITE_DESCRIPTION', '1', '网站描述', '1', '', '网站搜索引擎描述', '1435324617', '1435324617', '乐微网，微商', '50');
-INSERT INTO `py_config` VALUES ('3', 'WEB_SITE_KEYWORD', '1', '网站关键字', '1', '', '网站搜索引擎关键字', '1435324617', '1435324617', '乐微网，微商', '50');
-INSERT INTO `py_config` VALUES ('4', 'WEB_SITE_CLOSE', '5', '关闭站点', '1', '0:关闭,1:开启', '站点关闭后其他用户不能访问，管理员可以正常访问', '1435324617', '1435324617', '1', '50');
-INSERT INTO `py_config` VALUES ('5', 'OPEN_REGISTER', '5', '会员注册', '3', '0:关闭,1:开启', '关闭后所有访客都不可进行注册', '1435324617', '1435324617', '0', '50');
-INSERT INTO `py_config` VALUES ('9', 'GOODS_THUMB_WIDTH', '1', '商品缩略图宽度', '2', '', '', '1435324617', null, '120', '50');
-INSERT INTO `py_config` VALUES ('10', 'GOODS_THUMB_HEIGHT', '1', '商品缩略图高度', '2', '', '', '1435324617', null, '80', '50');
+INSERT INTO `py_config` VALUES ('1', 'WEB_TITLE', '1', '网站标题', '1', '', '网站标题前台显示标题', '1435324617', '1437226000', '易取网', '50');
 INSERT INTO `py_config` VALUES ('11', 'CONFIG_GROUP_LIST', '4', '配置分组', '0', '', '', '1435324617', '1435324617', '1:基本,2:内容,3:用户,4:系统', '50');
 INSERT INTO `py_config` VALUES ('12', 'CONFIG_TYPE_LIST', '4', '配置类型', '0', '', '', '1435324617', null, '1:数字,2:字符,3:文本,4:数组,5:枚举', '50');
+INSERT INTO `py_config` VALUES ('13', 'COPY_RIGHT', '3', '版本', '1', '', '', '1437226038', null, '版权所有：易取网', '50');
 
 -- ----------------------------
 -- Table structure for py_group
@@ -198,15 +202,17 @@ CREATE TABLE `py_member` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `password` char(32) NOT NULL,
+  `invalid_time` int(11) NOT NULL COMMENT '答题失效期',
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`user_id`),
   KEY `index_email` (`email`,`password`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of py_member
 -- ----------------------------
+INSERT INTO `py_member` VALUES ('1', 'gzute@qq.com', '95f80c77b416f1be2de33b282313e1e0', '0', '1437220553', '1437224643');
 
 -- ----------------------------
 -- Table structure for py_member_topic
@@ -215,17 +221,20 @@ DROP TABLE IF EXISTS `py_member_topic`;
 CREATE TABLE `py_member_topic` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `topic_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
   `answer` varchar(255) NOT NULL,
   `is_right` tinyint(1) NOT NULL,
   `answer_time` int(11) NOT NULL COMMENT '答题时间',
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of py_member_topic
 -- ----------------------------
+INSERT INTO `py_member_topic` VALUES ('2', '4', '1', 'd', '0', '1437318293', '1437318013', '0');
+INSERT INTO `py_member_topic` VALUES ('3', '5', '1', 'd', '1', '1437318306', '1437318013', '0');
 
 -- ----------------------------
 -- Table structure for py_menu
@@ -243,7 +252,7 @@ CREATE TABLE `py_menu` (
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COMMENT='模块表';
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COMMENT='模块表';
 
 -- ----------------------------
 -- Records of py_menu
@@ -264,6 +273,49 @@ INSERT INTO `py_menu` VALUES ('88', '文章分类', '87', 'articlecat', '*', '1'
 INSERT INTO `py_menu` VALUES ('89', '文章列表', '87', 'article', 'index', '1', 'fa-file-text', '50', '1436619439', '0');
 INSERT INTO `py_menu` VALUES ('90', '广告管理', '87', 'ad', '*', '1', 'fa-cubes', '50', '1436619541', '1436619699');
 INSERT INTO `py_menu` VALUES ('92', '消费记录', '84', 'pay', '*', '1', 'fa-rmb', '50', '1436619764', '0');
+INSERT INTO `py_menu` VALUES ('93', '专题管理', '87', 'page', '*', '1', 'fa-building-o', '50', '1437186834', '0');
+
+-- ----------------------------
+-- Table structure for py_note
+-- ----------------------------
+DROP TABLE IF EXISTS `py_note`;
+CREATE TABLE `py_note` (
+  `note_id` int(11) NOT NULL AUTO_INCREMENT,
+  `note_name` varchar(50) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `ip_code` varchar(30) NOT NULL,
+  `create_time` int(11) NOT NULL,
+  `replay` varchar(255) NOT NULL,
+  `replay_time` int(11) NOT NULL,
+  `is_show` tinyint(1) NOT NULL,
+  PRIMARY KEY (`note_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of py_note
+-- ----------------------------
+INSERT INTO `py_note` VALUES ('1', '霏霏 ', '松井石根城', '', '1437320341', '', '0', '0');
+INSERT INTO `py_note` VALUES ('2', '霏霏 ', '松井石根城', '', '1437320413', '', '0', '0');
+
+-- ----------------------------
+-- Table structure for py_page
+-- ----------------------------
+DROP TABLE IF EXISTS `py_page`;
+CREATE TABLE `py_page` (
+  `page_id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_title` varchar(255) NOT NULL COMMENT '专题名称',
+  `template` varchar(255) NOT NULL COMMENT '模板',
+  `content` text NOT NULL COMMENT '内容',
+  `locked` tinyint(1) NOT NULL COMMENT '是否锁定，锁定后不能显示',
+  `create_time` int(11) NOT NULL,
+  `update_time` int(11) NOT NULL,
+  PRIMARY KEY (`page_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of py_page
+-- ----------------------------
+INSERT INTO `py_page` VALUES ('1', '联系我们', 'contact', '&lt;p&gt;fdsfdsfdsfds&lt;br/&gt;&lt;/p&gt;', '0', '1437188486', '0');
 
 -- ----------------------------
 -- Table structure for py_pay_log
@@ -271,16 +323,20 @@ INSERT INTO `py_menu` VALUES ('92', '消费记录', '84', 'pay', '*', '1', 'fa-r
 DROP TABLE IF EXISTS `py_pay_log`;
 CREATE TABLE `py_pay_log` (
   `pay_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pay_sn` varchar(30) NOT NULL COMMENT '支付编号',
   `user_id` int(11) NOT NULL,
   `money` decimal(10,2) NOT NULL,
+  `buy_type` tinyint(2) NOT NULL COMMENT '消费类型',
   `pay_time` int(11) NOT NULL,
   `pay_status` tinyint(1) NOT NULL COMMENT '支付状态，1为成功，2为失败，0为未付款，3付款未确认',
   PRIMARY KEY (`pay_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of py_pay_log
 -- ----------------------------
+INSERT INTO `py_pay_log` VALUES ('3', '2015071904061', '1', '10.00', '1', '1437318363', '0');
+INSERT INTO `py_pay_log` VALUES ('4', '2015071919383', '1', '50.00', '2', '1437318530', '0');
 
 -- ----------------------------
 -- Table structure for py_region
@@ -3744,12 +3800,16 @@ CREATE TABLE `py_topic` (
   `answer_config` text NOT NULL COMMENT '答案集合',
   `answer` varchar(50) NOT NULL COMMENT '正确答案',
   `orderby` smallint(5) NOT NULL,
+  `is_free` tinyint(1) NOT NULL COMMENT '是否免费',
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`topic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of py_topic
 -- ----------------------------
-INSERT INTO `py_topic` VALUES ('2', 'dasfdafda', '/public/upload/image/20150712/1436703251295628.png', 'dsfsa', '{\"a\":\"fdafda\",\"b\":\"da\",\"c\":\"fdfdaf\",\"d\":\"dsfdafs\"}', 'a', '1', '1436704358', '0');
+INSERT INTO `py_topic` VALUES ('2', '测试题目一', '/public/upload/image/20150712/1436703251295628.png', 'dsfsa', '{\"a\":\"\\u7b54\\u6848\\u4e00\",\"b\":\"\\u7b54\\u6848\\u4e8c\",\"c\":\"\\u7b54\\u6848\\u4e09\",\"d\":\"\\u7b54\\u6848\\u56db\"}', 'a', '1', '1', '1436704358', '1437292264');
+INSERT INTO `py_topic` VALUES ('3', '遇到前车紧急停车时应该怎么做', '/public/upload/image/20150714/1436878518395849.jpeg', '', '{\"a\":\"\\u52a0\\u6cb9\\u524d\\u51b2\",\"b\":\"\\u51cf\\u901f\\u6162\\u884c\",\"c\":\"\\u9e23\\u5587\\u53ed\\u63d0\\u9192\",\"d\":\"\\u7d27\\u6025\\u5236\\u52a8\"}', 'b', '2', '1', '1437292221', '0');
+INSERT INTO `py_topic` VALUES ('4', '测试题三', '/public/upload/image/20150715/1436968380115441.jpeg', '', '{\"a\":\"\\u7b54\\u6848\\u4e00\",\"b\":\"\\u7b54\\u6848\\u4e8c\",\"c\":\"\\u7b54\\u6848\\u4e09\",\"d\":\"\\u7b54\\u6848\\u56db\"}', 'b', '3', '0', '1437292310', '0');
+INSERT INTO `py_topic` VALUES ('5', '测试题四', '/public/upload/image/20150715/1436965922223291.jpg', '', '{\"a\":\"\\u7b54\\u6848\\u4e00\",\"b\":\"\\u7b54\\u6848\\u4e8c\",\"c\":\"\\u7b54\\u6848\\u4e09\",\"d\":\"\\u7b54\\u6848\\u56db\"}', 'd', '4', '0', '1437292346', '0');

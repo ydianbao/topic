@@ -53,12 +53,3 @@ function power($item, $show_error = false) {
     return $result;
 }
 
-/**
- * 密码处理
- * @param $password
- * @return bool|string
- */
-function password($password) {
-    if(empty($password)) return false;
-    return md5(md5($password) . C('CRYPT_KEY'));
-}

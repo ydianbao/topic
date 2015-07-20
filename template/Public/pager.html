@@ -1,0 +1,21 @@
+<if condition="$pager.page_count gt 1">
+<div class="pagin">
+    <div class="message">共<i class="blue">{$pager.total}</i>条记录，当前显示第&nbsp;<i class="blue">{$pager.page}&nbsp;</i>页</div>
+    <ul class="paginList">
+        <if condition="$pager.prev_url neq ''">
+        <li class="paginItem">
+            <a href="{$pager.prev_url}"><span class="pagepre"></span></a>
+        </li>
+        </if>
+        <volist name="pager.pages" id="page">
+            <li class="paginItem <if condition="$key eq $pager['page']"> current</if>"><a href="{$page.page_url}">{$key}</a>
+           </li>
+        </volist>
+        <if condition="$pager.next_url neq ''">
+        <li class="paginItem">
+            <a href="{$pager.next_url}"><span class="pagenxt"></span></a>
+        </li>
+        </if>
+    </ul>
+</div>
+</if>

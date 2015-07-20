@@ -82,3 +82,59 @@ function mobile_browser() {
     }
     return false;
 }
+/**
+ * 密码处理
+ * @param $password
+ * @return bool|string
+ */
+function password($password) {
+    if(empty($password)) return false;
+    return md5(md5($password) . C('CRYPT_KEY'));
+}
+
+function ad($adId) {
+    $adModel = M('Ad');
+    $ad = $adModel->find($adId);
+    if(!$ad) return null;
+    $adConfig = json_decode($ad['ad_config'], true);
+    $view = \Think\Think::instance('Think\View');
+    if($adConfig) {
+        $view->assign('ad_config', $adConfig);
+        $html = $view->fetch('Public/ad');
+        echo $html;
+    }
+}
+
+function pager($total, $pageCount, $data = array(), $showNumber = 5) {
+        //没有数据不显示分页
+        if(empty($total) || empty($pageCount)) return null;
+
+        $pager = array();
+        $pager['total'] = $total;
+        $pager['page_count'] = $pageCount;
+        $pager['page'] = max((int)I('page'), 1);
+
+        $url = strtolower(U('', $data));
+
+
+        //设置上一页
+        if($pager['page'] > 1) {
+            $pager['prev_url'] = $url . '?page=' . ($pager['page'] - 1);
+        }
+        //设置下一页
+        if(($pager['page'] + 1)  <= $pager['page_count']) {
+            $pager['next_url'] = $url . '?page=' . ($pager['page'] + 1);
+        }
+        
+        $showStart = ceil($pager['page'] / $showNumber) * $showNumber - ($showNumber - 1);//设置开始页
+        $showEnd = $showStart + $showNumber -1;
+        $showEnd = $showEnd > $pager['page_count'] ? $pager['page_count'] : $showEnd;
+
+        if($pager['page_count'] > 1) {
+            for($i = $showStart; $i <= $showEnd; $i++){
+                $pager['pages'][$i]['page_url'] = $pager['page'] == $i ? 'javascript:;' : $url . '?page=' . $i;
+            }
+        }
+        
+        return $pager;
+}

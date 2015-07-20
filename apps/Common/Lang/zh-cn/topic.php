@@ -10,5 +10,7 @@
  * ====================================
  */
 return array(
-    'topic_title_lost' => '请输入标题！'
+    'topic_title_lost' => '请输入标题！',
+    'orderby_lost' => '请填写排序',
+    'orderby_repeat' => '排序不能重复',
 );

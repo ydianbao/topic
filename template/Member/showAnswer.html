@@ -1,0 +1,27 @@
+<include file="Public:header"/>
+<div class="content">
+    <div class="main">
+        <div class="topic_tips">
+        	<if condition="$topic['answer'] eq $topic['user_answer']">
+		    <p>正确</p>
+		    <else/>
+		    <p style="color:red">错误</p>
+			</if>
+		    <div class="select_box">
+		        <label>正确答案：{:strtoupper($topic['answer'])}</label>
+		        <label>{$topic.answer_title}</label>
+		        <label>答案说明：</label>
+		        <label>{$topic.answer_remark}</label>
+		    </div>
+		</div>
+		<div class="clear"></div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	setTimeout(function(){
+		location.href = '{:U("index")}';
+	}, 2000);
+});
+</script>
+<include file="Public:footer"/>

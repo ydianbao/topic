@@ -4,6 +4,9 @@
             <td>
                 <a class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="onOpen()">添加</a>
                 <a class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="onDelete()">删除</a>
+                <a class="datagrid-btn-separator"></a>
+                <a class="easyui-linkbutton" iconCls="icon-ok" plain="true" onclick="onLock(0)">允许显示</a>
+                <a class="easyui-linkbutton" iconCls="icon-lock" plain="true" onclick="onLock(1)">禁止显示</a>
             </td>
             <td width="50%" align="right">
                 <input name="keywords" class="easyui-textbox" data-options="buttonText:'查询',prompt:'请输入关键词',buttonIcon:'icon-search', onClickButton: onSearch" style="width:250px;">
@@ -12,17 +15,17 @@
     </table>
 </form>
 <div class="content-layout">
-    <table id="grid" title="题目列表" width="100%" height="450">
+    <table id="grid" title="专题列表" width="100%" height="450">
         <thead>
         <tr>
             <th data-options="field:'ck',checkbox:true"></th>
-            <th data-options="field:'topic_id',width:50, sortable:true">题目ID</th>
-            <th data-options="field:'topic_title',width:120">题目标题</th>
-            <th data-options="field:'orderby',width:120, sortable:true">排序</th>
-            <th data-options="field:'is_free',width:60, align:'center',formatter:function(value){
-        return value==1?'是':'否';}">免费</th>
+            <th data-options="field:'page_id',width:50">专题ID</th>
+            <th data-options="field:'page_title',width:120, sortable:true">专题名称</th>
+            <th data-options="field:'template',width:120">模板</th>
+            <th data-options="field:'locked',width:60, align:'center',formatter:function(value){
+        return value==1?'是':'否';}">禁止显示</th>
             <th data-options="field:'create_time',width:120, sortable:true">添加时间</th>
-            <th data-options="field:'update_time',width:120, sortable:true">最近编辑时间</th>
+            <th data-options="field:'update_time',width:120, sortable:true">编辑时间</th>
         </tr>
         </thead>
     </table>
@@ -57,7 +60,7 @@
         if(rows) {
             var items = [];
             for(var i = 0; i < rows.length; i++){
-                items.push(rows[i].topic_id);
+                items.push(rows[i].page_id);
             }
             items = items.join(',');
             easyui.doAjax('{:U("delete")}', {item_id: items}, function(){
@@ -68,12 +71,35 @@
 
 
     function onOpen(node){
-        var title = node ? '编辑题目：' + node.topic_title : '添加题目';
+        var title = node ? '编辑专题:' + node.page_title : '添加专题';
         var url = "{:U('form')}";
         if(node) {
-            url = http_build_query(url, {id: node.topic_id});
+            url = http_build_query(url, {id: node.page_id});
         }
         parent.openTab(null, title,url , true);
     }
 
+    function onLock(locked){
+        var rows = grid.datagrid('getChecked');
+        var items = [];
+        for(var i = 0; i < rows.length; i++){
+            items.push(rows[i].page_id);
+        }
+        items = items.join(',');
+        if(empty(items)){
+            easyui.alert('请选择需要操作的专题！');
+            return false;
+        }
+        easyui.confirm('请再次确认是否需要继续进行您的操作!', function(){
+            easyui.post('{:U("lock")}', {item_id: items, locked: locked}, function(result){
+                try{
+                    if(result.info){
+                        easyui.alert(result.info);
+                    }
+                    if(!result.status) return false;
+                    grid.datagrid('reload');
+                }catch (e){}
+            });
+        });
+    }
 </script>

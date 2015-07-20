@@ -1,0 +1,40 @@
+<include file="Public:header"/>
+<div class="content">
+    <div class="main topic_page">
+        <img src="{$topic.thumb_img}" width="200" height="200" class="topic_thumb">
+		<button class="button answerbutton">正确答案</button>
+		<div class="topic_title">
+		    问题{$topic.orderby}：{$topic.topic_title}
+		</div>
+		<ul class="topic_item">
+			<volist name="topic.answer_config" id="vo">
+		    <li answer="{$key}">
+		        {:strtoupper($key)}.{$vo}
+		    </li>
+		    </volist>
+		</ul>
+		<div class="clear"></div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.topic_item li').click(function(){
+		$('.topic_item li').removeClass('active');
+		$(this).addClass('active');
+	});
+	$('.answerbutton').click(function(){
+		var active = $('.topic_item li.active');
+		$.post('{:U("topic/setAnswer")}', {answer: active.attr('answer')}, function(result){
+			if(result.info) {
+				alert(result.info);
+				if(result.url) {
+					location.href = result.url;
+				}
+				return false;
+			}
+			window.location = '/topic/showAnswer.html';
+		}, 'JSON');
+	})
+});
+</script>
+<include file="Public:footer"/>

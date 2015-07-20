@@ -21,15 +21,15 @@ class MemberModel extends CommonModel {
     );
 
     protected $_validate = array(
-        array('email','require','{%USER_NAME_REQUIRE}'),
+        array('email','email','{%USER_NAME_REQUIRE}'),
         array('email','','{%USER_NAME_EXISTS}', self::MUST_VALIDATE, 'unique', self::MODEL_BOTH),
-        array('confirm_password','password','{%CONFIRM_PASSWORD_ERROR}', self::EXISTS_VALIDATE, 'confirm'), // 验证确认密码是否和密码一致
+        array('rpassword','password','{%RPASSWORD_ERROR}', self::EXISTS_VALIDATE, 'confirm'), // 验证确认密码是否和密码一致
         array('password', '6,32', '{%PASSWORD_ERROR}', self::VALUE_VALIDATE, 'length', self::MODEL_BOTH),
     );
 
     public function modifyPassword($params) {
         $_validate = array(
-            array('confirm_password','password','{%CONFIRM_PASSWORD_ERROR}', self::MUST_VALIDATE, 'confirm'),
+            array('rpassword','password','{%RPASSWORD_ERROR}', self::MUST_VALIDATE, 'confirm'),
             array('password', '6,32', '{%PASSWORD_ERROR}', self::MUST_VALIDATE, 'length', self::MODEL_BOTH),
         );
         $this->validate($_validate);

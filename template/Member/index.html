@@ -1,0 +1,48 @@
+<include file="Public:header"/>
+<div class="content">
+	<div class="rightBox miniBox">
+        <h2>会员注册</h2>
+    	<form method="post" name="login" action="{:U('member/save')}" onSubmit="return checkRegister(this)">
+        	<ul>
+        		<li>
+        			<label>邮箱：</label>
+        			{$data.email}
+        		</li>
+        		<li>
+        			<label>密码：</label>
+        			<input type="password" class="textbox" name="password" size="30">
+        		</li>
+        		<li>
+        			<label>再次输入密码：</label>
+        			<input type="password" class="textbox" name="rpassword" size="30">
+        		</li>
+        		<li>
+        			<br>
+        			<label></label>
+        			<input type="submit" class="button" value="修改">
+        		</li>
+        	</ul>
+    	</form>
+    </div>
+    <include file="menu"/>
+    <div class="clear"></div>
+</div>
+<script type="text/javascript">
+
+function checkRegister(form) {
+	if(form.password.value == '') {
+		alert('请输入密码！');
+		return false;
+	}
+	if(form.rpassword.value == '') {
+		alert('请再次输入密码！');
+		return false;
+	}
+	if(form.password.value != form.rpassword.value) {
+		alert('两次输入的密码不一致，请重新输入！');
+		return false;
+	}
+	return true;
+}
+</script>
+<include file="Public:footer"/>

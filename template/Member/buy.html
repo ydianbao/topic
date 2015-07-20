@@ -1,0 +1,36 @@
+<include file="Public:header"/>
+<div class="content">
+    <div class="main">
+    	<h2 class="base-title">在线充值</h2>
+        <div class="topic_tips">
+        	<input type="radio" name="buytype" value="2" checked> 50加币包月任答
+        	<br><br>
+        	<input type="radio" name="buytype" value="1"> 10加币包50题
+        	<br>
+        	<br>
+        	<button class="button">立即充值</button> 
+        	<if condition="!login('user_id')">
+        	或 <a href="{:U('member/login')}">登录</a> 答题
+        	</if>
+		</div>
+		<div class="clear"></div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.button').click(function(){
+		var active = $('[name="buytype"]:checked');
+		$.post('{:U("topic/setBuy")}', {buytype: active.val()}, function(result){
+			if(result.info) {
+				alert(result.info);
+				if(result.url) {
+					location.href = result.url;
+				}
+				return false;
+			}
+			window.location = '/member/buy.html';
+		}, 'JSON');
+	})
+});
+</script>
+<include file="Public:footer"/>

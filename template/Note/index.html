@@ -1,0 +1,60 @@
+<include file="Public:header"/>
+<div class="content">
+    <div class="main">
+        <h2 class="base-title">在线留言</h2>
+        <div class="miniBox">
+        	<form method="post" name="login" action="javascript:;" onSubmit="return checkNote(this)">
+	        	<ul>
+	        		<li>
+	        			<label>姓名：</label>
+	        			<input type="text" class="textbox" name="note_name" size="30">
+	        		</li>
+	        		<li>
+	        			<label>内容：</label>
+	        			<textarea name="content" rows="5" cols="35"></textarea>
+	        		</li>
+	        		<li>
+	        			<br>
+	        			<label></label>
+	        			<input type="submit" class="button" value="提交留言">
+	        		</li>
+	        	</ul>
+        	</form>
+    	</div>
+    	<volist name="lists" id="vo">
+        <ul class="note-lists">
+            <li class="title"><span>{$vo.create_time}</span>{$vo.note_name}</li>
+            <li>
+            	{$vo.content}
+            	<notempty name="vo.replay">
+            	<p><strong>回复：</strong>{$vo.replay}</p>
+            	</notempty>
+            </li>
+        </ul>
+        </volist>
+        <include file="Public:pager" />
+    </div>
+</div>
+<script type="text/javascript">
+function checkNote(form) {
+	if(form.note_name.value == '') {
+		alert('请填写姓名！');
+		return false;
+	}
+	if(form.content.value == '') {
+		alert('请填写内容！');
+		return false;
+	}
+	$.post('{:U("note/save")}', {note_name: form.note_name.value, content: form.content.value}, function(result){
+		if(result.info) {
+			alert(result.info);
+		}
+		if(!result.status) {
+			return false;
+		}
+		form.reset();
+		location.reload();
+	}, 'JSON');
+}
+</script>
+<include file="Public:footer"/>

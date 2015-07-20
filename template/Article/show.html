@@ -1,0 +1,12 @@
+<include file="Public:header"/>
+<div class="content">
+    <div class="main">
+        <div class="article-title">
+            <h2>{$data.title}</h2>
+        </div>
+        <div class="article-detail">
+            {:htmlspecialchars_decode($data['content'])}
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>
